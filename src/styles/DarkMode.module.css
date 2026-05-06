@@ -1,3 +1,36 @@
-/* TODO (optional): Define styles for dark mode */
+/* src/styles/DarkMode.module.css */
 
-/* TODO (optional): Ensure text and background colors adjust for dark mode */
+.app {
+  min-height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.light {
+  background-color: #ffffff;
+  color: #213547;
+}
+
+.dark {
+  background-color: #242424;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+/* Optional: make the toggle button reflect theme */
+.toggleBtn {
+  margin: 1rem 0;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.light .toggleBtn {
+  background-color: #f3f4f6;
+  color: #213547;
+  border: 1px solid #d1d5db;
+}
+
+.dark .toggleBtn {
+  background-color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.87);
+  border: 1px solid #333;
+}

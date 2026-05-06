@@ -2,35 +2,61 @@ import React, { useState } from 'react'
 import ProductList from './components/ProductList'
 import DarkModeToggle from './components/DarkModeToggle'
 import Cart from './components/Cart'
+import themeStyles from './styles/DarkMode.module.css'
+
 
 const App = () => {
-  // TODO: Implement state for dark mode toggle
+  // Dark mode state
+  const [darkMode, setDarkMode] = useState(false)
 
-  // TODO: Implement state for cart management
+  // Cart state (array of products)
+  const [cartItems, setCartItems] = useState([])
 
-  // TODO: Implement state for category filtering
+  // Category filter state
+  const [category, setCategory] = useState('all')
+
+  const handleToggleDarkMode = () => {
+    setDarkMode(prev => !prev)
+  }
+
+  const handleAddToCart = (product) => {
+    setCartItems(prevItems => [...prevItems, product])
+  }
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value)
+  }
 
   return (
-    <div>
+    <div className={`${themeStyles.app} ${
+      darkMode ? themeStyles.dark : themeStyles.light
+   }`}
+>
       <h1>🛒 Shopping App</h1>
       <p>
         Welcome! Your task is to implement filtering, cart management, and dark
         mode.
       </p>
 
-      {/* TODO: Render DarkModeToggle and implement dark mode functionality */}
+      {/* Dark Mode Toggle */}
+      <DarkModeToggle darkMode={darkMode} onToggle={handleToggleDarkMode} />
 
-      {/* TODO: Implement category filter dropdown */}
-      <label>Filter by Category: </label>
-      <select>
+      {/* Category Filter */}
+      <label htmlFor="category-filter">Filter by Category: </label>
+      <select
+        id="category-filter"
+        value={category}
+        onChange={handleCategoryChange}
+      >
         <option value="all">All</option>
         <option value="Fruits">Fruits</option>
         <option value="Dairy">Dairy</option>
       </select>
 
-      <ProductList />
+      <ProductList category={category} onAddToCart={handleAddToCart} />
 
-      {/* TODO: Implement and render Cart component */}
+      {/* Cart */}
+      <Cart cartItems={cartItems} />
     </div>
   )
 }
